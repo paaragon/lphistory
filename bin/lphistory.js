@@ -9,7 +9,7 @@ yargs.scriptName('lphistory')
       describe: 'Conversation id to search'
     }).describe('t', 'Time shift for Live Person OAuth timestamp')
       .alias('t', 'time--shift')
-      .describe('l', 'Line length for history. Min: 60')
+      .describe('l', 'Line length for history. Min: 80')
       .alias('l', 'line-length');
   }, searchConversation)
   .command('clear-config', 'Clear configuration', () => { }, clearConfiguration)
@@ -23,8 +23,8 @@ yargs.scriptName('lphistory')
 async function searchConversation(argv) {
   const conversationId = argv.conversationid;
   const timeShift = argv.t;
-  let lineLength = argv.l || 60;
-  lineLength = lineLength < 60 ? 60 : lineLength;
+  let lineLength = argv.l || 80;
+  lineLength = lineLength < 80 ? 80 : lineLength;
   await index.configProcess();
   console.log('\nSearch conversation\n\n');
   await index.printLpHistory(conversationId, timeShift, lineLength);
