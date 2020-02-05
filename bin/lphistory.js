@@ -11,6 +11,10 @@ yargs.scriptName('lphistory')
       .alias('t', 'time--shift');
   }, searchConversation)
   .command('clear-config', 'Clear configuration', () => { }, clearConfiguration)
+  .example('$0 search [conversationid] -t 60000', 'Search for conversation with Live Person OAuth timestamp shift')
+  .example('$0 search --help', 'Description of search command')
+  .example('$0 clear-config', 'Clears configuration')
+  .example('$0 clear-config --help', 'Description of clear-config command')
   .help()
   .argv;
 
