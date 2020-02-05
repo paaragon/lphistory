@@ -3,10 +3,10 @@ const yargs = require('yargs');
 const index = require('../lib/index');
 
 yargs.scriptName('lphistory')
-  .command('search [conversationid]', 'Search for conversation', (yargs) => {
+  .command('search [conversationid]', 'Search conversation', (yargs) => {
     yargs.positional('conversationid', {
       type: 'string',
-      describe: 'Conversation id for search'
+      describe: 'Conversation id to search'
     }).describe('t', 'Time shift for Live Person OAuth timestamp')
       .alias('t', 'time--shift')
       .describe('l', 'Line length for history. Min: 60')
