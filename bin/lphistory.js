@@ -13,7 +13,7 @@ yargs.scriptName('lphistory')
       .alias('l', 'line-length');
   }, searchConversation)
   .command('clear-config', 'Clear configuration', () => { }, clearConfiguration)
-  .example('$0 search [conversationid] -t 60000', 'Search for conversation with Live Person OAuth timestamp shift')
+  .example('$0 search [conversationid] -t 60000', 'Search conversation with Live Person OAuth timestamp shift')
   .example('$0 search --help', 'Description of search command')
   .example('$0 clear-config', 'Clears configuration')
   .example('$0 clear-config --help', 'Description of clear-config command')
@@ -26,7 +26,7 @@ async function searchConversation(argv) {
   let lineLength = argv.l || 60;
   lineLength = lineLength < 60 ? 60 : lineLength;
   await index.configProcess();
-  console.log('\nSearch for conversation');
+  console.log('\nSearch conversation\n\n');
   await index.printLpHistory(conversationId, timeShift, lineLength);
   process.exit(0);
 }
