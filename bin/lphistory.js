@@ -8,7 +8,9 @@ yargs.scriptName('lphistory')
       type: 'string',
       describe: 'Conversation id for search'
     }).describe('t', 'Time shift for Live Person OAuth timestamp')
-      .alias('t', 'time--shift');
+      .alias('t', 'time--shift')
+      .describe('l', 'Line length for history. Min: 60')
+      .alias('l', 'line-length');
   }, searchConversation)
   .command('clear-config', 'Clear configuration', () => { }, clearConfiguration)
   .example('$0 search [conversationid] -t 60000', 'Search for conversation with Live Person OAuth timestamp shift')
@@ -19,15 +21,18 @@ yargs.scriptName('lphistory')
   .argv;
 
 async function searchConversation(argv) {
-  const conversationId = argv.c;
+  const conversationId = argv.conversationid;
   const timeShift = argv.t;
+  let lineLength = argv.l || 60;
+  lineLength = lineLength < 60 ? 60 : lineLength;
   await index.configProcess();
-  await index.getLpHistory(conversationId, timeShift);
+  console.log('\nSearch for conversation');
+  await index.printLpHistory(conversationId, timeShift, lineLength);
   process.exit(0);
 }
 
 function clearConfiguration(argv) {
   index.clearConfig();
-  console.log('Configuration cleared');
+  console.log('\nConfiguration cleared');
   process.exit(0);
 }
