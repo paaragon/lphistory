@@ -1,3 +1,7 @@
+const moment = require('moment');
+const time = moment.utc([2010, 1, 14, 15, 25, 50, 125]).toDate().getTime();
+const date = moment(time).format('YYYY MM DD HH:mm:ssZ');
+
 module.exports.msg1 = {
   "type": "TEXT_PLAIN",
   "messageData": {
@@ -10,7 +14,7 @@ module.exports.msg1 = {
   "dialogId": "8f52b797-7c45-459f-8f17-5ce11491a020",
   "participantId": "ac4a51efea85d91c83de6873a94cbd59c683f74e65745a931854aacc97bf3271",
   "time": "2020-02-05 08:28:12.571+0000",
-  "timeL": 1580891292571,
+  "timeL": time,
   "sentBy": "Consumer",
   "contextData": {
     "rawMetadata": "[]",
@@ -19,7 +23,7 @@ module.exports.msg1 = {
 };
 
 module.exports.transfer1 = {
-  "timeL": 1580891292625,
+  "timeL": time,
   "time": "2020-02-05 08:28:12.625+0000",
   "assignedAgentId": "null",
   "targetSkillId": 1328139750,
@@ -48,7 +52,7 @@ module.exports.participant1 = {
   "agentGroupName": "Main Group",
   "agentGroupId": -1,
   "time": "2020-02-05 08:28:12.561+0000",
-  "timeL": 1580891292561,
+  "timeL": time,
   "permission": "MANAGER",
   "dialogId": "8f52b797-7c45-459f-8f17-5ce11491a020"
 };
