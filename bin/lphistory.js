@@ -10,9 +10,16 @@ yargs.scriptName('lphistory')
     }).describe('t', 'Time shift for Live Person OAuth timestamp')
       .alias('t', 'time--shift')
       .describe('l', 'Line length for history. Min: 80')
-      .alias('l', 'line-length');
+      .alias('l', 'line-length')
+      .describe('e', 'Environment')
+      .alias('e', 'environment');
   }, searchConversation)
-  .command('clear-config', 'Clear configuration', () => { }, clearConfiguration)
+  .command('config [action]', 'Clear configuration (it is posible to specify the envionment)', (yargs) => {
+    yargs.positional('action', {
+      type: String,
+      choices: ['clear', 'list']
+    }).describe('e', 'Environment to config');
+  }, configTools)
   .example('$0 search [conversationid] -t 60000', 'Search conversation with Live Person OAuth timestamp shift')
   .example('$0 search --help', 'Description of search command')
   .example('$0 clear-config', 'Clears configuration')
@@ -23,16 +30,23 @@ yargs.scriptName('lphistory')
 async function searchConversation(argv) {
   const conversationId = argv.conversationid;
   const timeShift = argv.t;
+  const env = argv.e || 'default';
   let lineLength = argv.l || 80;
   lineLength = lineLength < 80 ? 80 : lineLength;
-  await index.configProcess();
-  console.log('\nSearch conversation\n\n');
-  await index.printLpHistory(conversationId, timeShift, lineLength);
+  await index.configProcess(env);
+  console.log('\nSearch conversation\n');
+  await index.printLpHistory(conversationId, timeShift, lineLength, env);
   process.exit(0);
 }
 
-function clearConfiguration(argv) {
-  index.clearConfig();
-  console.log('\nConfiguration cleared');
+function configTools(argv) {
+  const action = argv.action;
+  const env = arv.e;
+  if (action === 'clear') {
+    index.clearConfig(env);
+    console.log('\nConfiguration cleared');
+  } else if (action === 'list') {
+    index.listConfiguration(env);
+  }
   process.exit(0);
 }
