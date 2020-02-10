@@ -17,7 +17,7 @@ yargs.scriptName('lphistory')
   .command('config [action]', 'Clear configuration (it is posible to specify the envionment)', (yargs) => {
     yargs.positional('action', {
       type: String,
-      choices: ['clear', 'list']
+      choices: ['create', 'clear', 'list']
     }).describe('e', 'Environment to config');
   }, configTools)
   .example('$0 search [conversationid] -t 60000', 'Search conversation with Live Person OAuth timestamp shift')
@@ -39,14 +39,15 @@ async function searchConversation(argv) {
   process.exit(0);
 }
 
-function configTools(argv) {
+async function configTools(argv) {
   const action = argv.action;
-  const env = arv.e;
+  const env = argv.e;
   if (action === 'clear') {
     index.clearConfig(env);
-    console.log('\nConfiguration cleared');
   } else if (action === 'list') {
-    index.listConfiguration(env);
+    index.listConfig(env);
+  } else if (action === 'create') {
+    await index.createConfig(env);
   }
   process.exit(0);
 }
