@@ -1,6 +1,17 @@
 # Live Person History CLI
 
+## Install
+
+```
+npm install -g lphistory
+```
+
 ## Usage
+
+#### Help
+
+Summary
+
 ```
 $ lphistory --help
 
@@ -22,6 +33,8 @@ Examples:
   lphistory clear-config --help             Description of clear-config command
 ```
 
+Search help
+
 ```
 $ lphistory search --help
 
@@ -40,6 +53,8 @@ Options:
   -e, --environment  Environment
 ```
 
+Config help
+
 ```
 $ lphistory config --help
 
@@ -54,4 +69,28 @@ Options:
   --version  Show version number                                       [boolean]
   --help     Show help                                                 [boolean]
   -e         Environment to config
+```
+
+## Search conversation
+
+### Default
+
+```
+lphistory search <conversationid>
+```
+
+### Specifying environment
+
+If you want to specify an environment, you can pass the `-e` argument. The event name is up to you. If the environment doesn't exists, it will de created.
+
+```
+lphistory search <conversationid> -e production
+```
+
+### Specifying timestamp shift
+
+If the response gives a 500 error, it is possible that the request timestamp is invalid. This is because OAuth security sends a wrong timestamp to Live Person. It can be fixed specifying a timestamp shift with the argument `-t` followed by the shift in milliseconds.
+
+```
+lphistory search <conversationid> -t 60000
 ```
