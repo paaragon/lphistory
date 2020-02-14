@@ -8,7 +8,7 @@
   },
   "preferGlobal": true,
   "scripts": {
-    "test": "mocha --exit"
+    "test": "nyc mocha --exit"
   },
   "author": "pablo.aragon22@gmail.com",
   "license": "ISC",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^7.0.1",
-    "mock-fs": "^4.10.4"
+    "mock-fs": "^4.10.4",
+    "sinon": "^8.1.1"
   }
 }
