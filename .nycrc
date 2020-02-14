@@ -1,0 +1,20 @@
+{
+  "all": true,
+  "cache": false,
+  "exclude": [
+    "coverage/**/*",
+    "test/**/*",
+    "build/**/*"
+  ],
+  "extensions": [
+    ".js"
+  ],
+  "report-dir": "./coverage",
+  "reporter": [
+    "cobertura",
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "temp-directory": "./coverage/.nyc_output"
+}

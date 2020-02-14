@@ -42,4 +42,10 @@ describe('Build Print', () => {
     const print = eventPrinter.buildPrint(event, 0, 80);
     expect(print).to.be.eq(expected.expectedParticipant1);
   });
+
+  it('Build Consumer info', () => {
+    const user = { firstName: 'hulio', lastName: 'perez', email: 'email@host.com', phone: '654654654', address: 'C/ falsa 123' };
+    const print = eventPrinter.buildConsumerInfo(user, 80);
+    expect(print).to.be.eq('==================================== CONSUMER INFO ====================================>\n\u001b[33m    First Name:\u001b[39mhulio\n\u001b[33m    Last name:\u001b[39mperez\n\u001b[33m    Email:\u001b[39memail@host.com\n\u001b[33m    Phone:\u001b[39m654654654\n\u001b[33m    Address:\u001b[39mC/ falsa 123\n\n');
+  });
 });
