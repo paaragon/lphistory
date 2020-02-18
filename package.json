@@ -2,7 +2,6 @@
   "name": "lphistory",
   "version": "2.1.1",
   "description": "This package prints in console the history records of a Live Person Conversation",
-  "main": "./lib/index.js",
   "bin": {
     "lphistory": "./bin/lphistory.js"
   },
