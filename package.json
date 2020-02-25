@@ -1,6 +1,6 @@
 {
   "name": "lphistory",
-  "version": "2.1.2",
+  "version": "2.3.2",
   "description": "This package prints in console the history records of a Live Person Conversation",
   "bin": {
     "lphistory": "./bin/lphistory.js"
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "chalk": "^3.0.0",
     "mocha": "^7.0.1",
     "mock-fs": "^4.10.4",
     "sinon": "^8.1.1"
