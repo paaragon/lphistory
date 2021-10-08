@@ -63,7 +63,7 @@ lphistory config [action]
 Clear configuration (it is posible to specify the envionment)
 
 Positionals:
-  action                                              [choices: "clear", "list"]
+  action                                              [choices: "create", "clear", "list"]
 
 Options:
   --version  Show version number                                       [boolean]
