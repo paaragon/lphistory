@@ -1,6 +1,6 @@
 {
   "name": "lphistory",
-  "version": "2.8.6",
+  "version": "2.8.4",
   "description": "This package prints in console the history records of a Live Person Conversation",
   "bin": {
     "lphistory": "./bin/lphistory.js"
@@ -8,7 +8,9 @@
   "preferGlobal": true,
   "scripts": {
     "test": "nyc mocha --exit",
-    "lint": "eslint \"./**/*.js\" --fix"
+    "lint": "eslint \"./**/*.js\" --fix",
+    "preversion": "npm run lint && npm run test",
+    "prepublish": "git add . && git push && git push --tags"
   },
   "author": "pablo.aragon22@gmail.com",
   "license": "ISC",
