@@ -1,5 +1,7 @@
 # Live Person History CLI
 
+[![Build Status](https://app.travis-ci.com/paaragon/lphistory.svg?branch=master)](https://app.travis-ci.com/paaragon/lphistory)
+
 ## Install
 
 ```
