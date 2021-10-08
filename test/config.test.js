@@ -1,11 +1,12 @@
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const mockFs = require('mock-fs');
 const path = require('path');
 const sinon = require('sinon');
 const fs = require('fs');
+const {
+  describe, it, afterEach, beforeEach,
+} = require('mocha');
 const config = require('../lib/config/config');
-const question = require('../lib/config/question');
-const configMocks = require('./mocks/config.mock');
 
 const CONFIG_FOLDER = path.join(__dirname, '.', '..', 'lib', 'config', 'files');
 
@@ -44,7 +45,7 @@ describe('Config test', () => {
       expect(envs.length).to.be.eq(1);
       expect(envs[0]).to.be.eq('uat');
     });
-    it(`If environment is specified and it doesn't exists in fs, existent env length should be 0.`, () => {
+    it('If environment is specified and it doesn\'t exists in fs, existent env length should be 0.', () => {
       const mock = {};
       mock[CONFIG_FOLDER] = {
         'config.uat.json': '',
@@ -74,7 +75,7 @@ describe('Config test', () => {
       mockFs.restore();
       sinon.restore();
     });
-    it(`If no env provided and 2 files in fs, config must exists.`, () => {
+    it('If no env provided and 2 files in fs, config must exists.', () => {
       const mock = {};
       mock[CONFIG_FOLDER] = {
         'config.default.json': '',
@@ -94,14 +95,14 @@ describe('Config test', () => {
       const exists = config._configExists('uat');
       expect(exists).to.be.true;
     });
-    it(`If no env provided and no files in fs, config mustn't exists.`, () => {
+    it('If no env provided and no files in fs, config mustn\'t exists.', () => {
       const mock = {};
       mock[CONFIG_FOLDER] = {};
       mockFs(mock);
       const exists = config._configExists();
       expect(exists).to.be.false;
     });
-    it(`If env is provided and corresponding file isn't in fs, config mustn't exists.`, () => {
+    it('If env is provided and corresponding file isn\'t in fs, config mustn\'t exists.', () => {
       const mock = {};
       mock[CONFIG_FOLDER] = {
         'config.default.json': '',
@@ -135,7 +136,7 @@ describe('Config test', () => {
       mockFs(mock);
       const consoleSpy = sinon.spy(console, 'log');
       await config.configProcess('uat');
-      expect(consoleSpy.getCall(0).args[0]).has.to.be.eq(`\nSearching conversation with \u001b[32muat\u001b[39m credentials`);
+      expect(consoleSpy.getCall(0).args[0]).has.to.be.eq('\nSearching conversation with \u001b[32muat\u001b[39m credentials');
       consoleSpy.restore();
     });
   });
@@ -205,7 +206,7 @@ describe('Config test', () => {
       mockFs(mock);
       const consoleSpy = sinon.spy(console, 'log');
       config.listConfig();
-      expect(consoleSpy.getCall(0).args[0]).has.to.be.eq(`\u001b[31m\n    NO CONFIGURATION FOUND\u001b[39m`);
+      expect(consoleSpy.getCall(0).args[0]).has.to.be.eq('\u001b[31m\n    NO CONFIGURATION FOUND\u001b[39m');
       consoleSpy.restore();
     });
     it('If no config files in fs and env provided, no config is printed', () => {
@@ -217,7 +218,7 @@ describe('Config test', () => {
       mockFs(mock);
       const consoleSpy = sinon.spy(console, 'log');
       config.listConfig('pro');
-      expect(consoleSpy.getCall(0).args[0]).has.to.be.eq(`\u001b[31m\n    NO CONFIGURATION FOUND FOR ENVIRONMENT\u001b[39m`);
+      expect(consoleSpy.getCall(0).args[0]).has.to.be.eq('\u001b[31m\n    NO CONFIGURATION FOUND FOR ENVIRONMENT\u001b[39m');
       consoleSpy.restore();
     });
     it('If config files in fs and no env provided, all config files printed', () => {
@@ -242,10 +243,12 @@ describe('Config test', () => {
         ['    Consumer secret:', '\u001b[33m3\u001b[39m'],
         ['    Token:          ', '\u001b[33m4\u001b[39m'],
         ['    Token secret:   ', '\u001b[33m5\u001b[39m'],
-      ]
-      for (const [index, out] of outputs.entries()) {
-        for (let i = 0; i < out.length; i++) {
-          expect(consoleSpy.getCall(index).args[i]).has.to.be.eq(out[i]);
+      ];
+      const outputEntries = outputs.entries();
+      for (let i = 0; i < outputEntries; i += 1) {
+        const [index, out] = outputEntries[i];
+        for (let j = 0; j < out.length; j += 1) {
+          expect(consoleSpy.getCall(index).args[j]).has.to.be.eq(out[j]);
         }
       }
       consoleSpy.restore();

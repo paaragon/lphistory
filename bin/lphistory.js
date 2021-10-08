@@ -3,10 +3,10 @@ const yargs = require('yargs');
 const index = require('../lib/index');
 
 yargs.scriptName('lphistory')
-  .command('search [conversationid]', 'Search conversation', (yargs) => {
-    yargs.positional('conversationid', {
+  .command('search [conversationid]', 'Search conversation', (args) => {
+    args.positional('conversationid', {
       type: 'string',
-      describe: 'Conversation id to search'
+      describe: 'Conversation id to search',
     }).describe('t', 'Time shift for Live Person OAuth timestamp')
       .alias('t', 'time-shift')
       .describe('l', 'Line length for history. Min: 80')
@@ -16,10 +16,10 @@ yargs.scriptName('lphistory')
       .describe('d', 'Daemon log verbosity')
       .alias('d', 'daemon-verb');
   }, searchConversation)
-  .command('config [action]', 'Clear configuration (it is posible to specify the envionment)', (yargs) => {
-    yargs.positional('action', {
+  .command('config [action]', 'Clear configuration (it is posible to specify the envionment)', (args) => {
+    args.positional('action', {
       type: String,
-      choices: ['create', 'clear', 'list']
+      choices: ['create', 'clear', 'list'],
     }).describe('e', 'Environment to config');
   }, configTools)
   .example('$0 search [conversationid] -t 60000 -d', 'Search conversation with Live Person OAuth timestamp shift')
@@ -43,7 +43,7 @@ async function searchConversation(argv) {
 }
 
 async function configTools(argv) {
-  const action = argv.action;
+  const { action } = argv;
   const env = argv.e;
   if (action === 'clear') {
     index.clearConfig(env);

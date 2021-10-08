@@ -1,6 +1,7 @@
 const moment = require('moment');
+const { expect } = require('chai');
+const { describe, it } = require('mocha');
 const eventPrinter = require('../lib/search/eventprinter');
-const expect = require('chai').expect;
 const expected = require('./mocks/expected.mock');
 const msgMocks = require('./mocks/events.mock');
 
@@ -8,7 +9,7 @@ const time = moment.utc([2010, 1, 14, 15, 25, 50, 125]).toDate().getTime();
 
 describe('Build Print', () => {
   it('Build Start', () => {
-    const event = { type: 'start', time: time, data: { timeL: time, conversationId: 'xxx-xxx-xxx-xxx' } };
+    const event = { type: 'start', time, data: { timeL: time, conversationId: 'xxx-xxx-xxx-xxx' } };
     const print = eventPrinter.buildPrint(event, time, 80);
     expect(print).to.be.eq(expected.expectedStart);
   });
@@ -20,7 +21,7 @@ describe('Build Print', () => {
   });
 
   it('Build End', () => {
-    const event = { type: 'end', time: time, data: { timeL: time, conversationId: 'xxx-xxx-xxx-xxx' } };
+    const event = { type: 'end', time, data: { timeL: time, conversationId: 'xxx-xxx-xxx-xxx' } };
     const print = eventPrinter.buildPrint(event, time, 80);
     expect(print).to.be.eq(expected.expectedEnd);
   });
@@ -44,7 +45,9 @@ describe('Build Print', () => {
   });
 
   it('Build Consumer info', () => {
-    const user = { firstName: 'hulio', lastName: 'perez', email: 'email@host.com', phone: '654654654', address: 'C/ falsa 123' };
+    const user = {
+      firstName: 'hulio', lastName: 'perez', email: 'email@host.com', phone: '654654654', address: 'C/ falsa 123',
+    };
     const print = eventPrinter.buildConsumerInfo(user, 80);
     expect(print).to.be.eq('==================================== CONSUMER INFO ====================================>\n\u001b[33m    First Name:\u001b[39mhulio\n\u001b[33m    Last name:\u001b[39mperez\n\u001b[33m    Email:\u001b[39memail@host.com\n\u001b[33m    Phone:\u001b[39m654654654\n\u001b[33m    Address:\u001b[39mC/ falsa 123\n\n');
   });
