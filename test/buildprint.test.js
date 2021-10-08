@@ -17,7 +17,7 @@ describe('Build Print', () => {
   it('Build End undefined', () => {
     const event = { type: 'end', time: 0, data: { timeL: 0, conversationId: 'xxx-xxx-xxx-xxx' } };
     const print = eventPrinter.buildPrint(event, 0, 80);
-    expect(print).to.be.eq(undefined);
+    expect(print).to.be.eq('');
   });
 
   it('Build End', () => {
