@@ -5,8 +5,8 @@ node_js:
 jobs:
   include:
     - stage: testing
-      if: branch in (master, develop)
-      script: # if this is not set, it will run npm run test 
+      if: branch in (master)
+      script: # if this is not set, it will run npm run test
         - npm run test
     - stage: npm release
       # only release on master branch
