@@ -8,11 +8,7 @@
   "preferGlobal": true,
   "scripts": {
     "test": "nyc mocha --exit",
-    "lint": "eslint \"./**/*.js\" --fix",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "git add .",
-    "postversion": "git push && git push --tags"
+    "lint": "eslint \"./**/*.js\" --fix"
   },
   "author": "pablo.aragon22@gmail.com",
   "license": "ISC",
