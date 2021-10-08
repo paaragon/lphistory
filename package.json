@@ -10,7 +10,7 @@
     "test": "nyc mocha --exit",
     "lint": "eslint \"./**/*.js\" --fix",
     "preversion": "npm run lint && npm run test",
-    "prepublish": "git add . && git push && git push --tags"
+    "prepublishOnly": "git add . && git push && git push --tags"
   },
   "author": "pablo.aragon22@gmail.com",
   "license": "ISC",
